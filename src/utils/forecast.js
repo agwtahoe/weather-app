@@ -6,7 +6,7 @@ const forecast = (lat, long, callback) => {
     request({url, json: true}, (error, { body }) => {
         if (error) {
             callback('Unable to connect to weather service', undefined)
-        } 
+        }
         else if (body.error) {
             callback('Location not found.', undefined)
         }
@@ -14,7 +14,8 @@ const forecast = (lat, long, callback) => {
             const temp = body.current.temperature
             const feels = body.current.feelslike
             const desc = body.current.weather_descriptions[0]
-            callback(undefined, desc + '. It is currently ' + temp + ' degrees out. It feels like ' + feels + ' degrees.')
+            const humidity = body.current.humidity
+            callback(undefined, desc + '. It is currently ' + temp + ' degrees out. It feels like ' + feels + ' degrees. The humidity is ' + humidity + '.')
         }
     })
 }
